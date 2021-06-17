@@ -41,9 +41,16 @@ class Airplane {
           + It should return a string with `name` and `age`. Example: "Mary, 50"
   */
   
- class Person {
+class Person {
+  constructor(age,name){
+    this.age = age;
+    this.name = name;
     
-  }
+
+}
+
+
+}
   
   /*
     TASK 2
