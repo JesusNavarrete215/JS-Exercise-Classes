@@ -88,17 +88,36 @@ this.odometer = 0;
 fill(gallons){
   return this.tank += gallons;
 } 
-drive(distance){
-  return this.odometer = this.odometer + distance;
-  return this.tank = this.tank - (this.milesPerGallon * distance);
-}
-fuel(){
-  if(this.tank === 0){
+// drive(distance){
+//   return this.odometer = this.odometer + distance;
+//   this.tank = this.tank - distance / this.milesPerGallon;
+//   if(this.tank = 0){
+//     return `I ran out of fuel at ${this.odometer} miles!`
+//   }
+// } 
+
+
+
+drive(distance) {
+  // there IS enough gas
+  if (this.tank * this.milesPerGallon > distance) {
+    this.odometer += distance;
+    this.tank = this.tank - distance / this.milesPerGallon;
+
+    // console.log(`MPG: ${this.milesPerGallon}, Made it fine - Tank: ${this.tank}. I've got ${this.milesPerGallon} MPG`);
+    // console.log(`Made it fine - Tank: ${this.tank}`);
+  }
+  // theres NOT enough gas
+  else {
+    this.odometer = this.odometer + this.tank * this.milesPerGallon;
+    this.tank = 0;
+
+    // console.log(`I ran out of fuel at ${this.odometer} miles! Tank: ${this.tank}`);
     return `I ran out of fuel at ${this.odometer} miles!`;
   }
 }
-
 }
+
 
   /*
     TASK 3
@@ -141,14 +160,14 @@ fuel(){
       constructor(attributes){
         super(attributes);
         this.specialty = attributes.specialty;
-        this. favLanguage = attributes.favLanguage;
+        this.favLanguage = attributes.favLanguage;
         this.catchPhrase = attributes.catchPhrase;
       }
       demo(subject){
        return `Today we are learning about ${subject}`;
       }
-      grade(){
-        returns `${student.name} receives a perfect score on ${subject}`;
+      grade(student, subject){
+        return `${student.name} receives a perfect score on ${subject}`;
       }
 
     }
@@ -167,7 +186,22 @@ fuel(){
           + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
           + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
   */
- class Student {
+ class Student extends Lambdasian {
+  constructor(attributes){
+    super(attributes);
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+  }
+  listSubjects(){
+    return `Loving ${this.favSubjects}!`;
+  }
+  PRAssignment(subject){
+   return `${this.name} has submitted a PR for ${subject}`;
+  }
+  sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`;
+  }
      
  }
   
@@ -184,7 +218,19 @@ fuel(){
           + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
           + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
   */
- class ProjectManager {
+ class ProjectManager extends Instructor {
+  constructor(attributes){
+    super(attributes);
+    this.gradClassName = attributes.gradClassName;
+    this.favInstructor = attributes.favInstructor;
+  }
+ 
+  standUp(channel){
+   return `${this.name} announces to ${channel}, @channel standy times!`;
+  }
+  debugsCode(student, subject){
+    return `${this.name} debugs ${student.name}'s code on ${subject}`;
+  }
      
  }
   /*
