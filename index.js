@@ -99,20 +99,13 @@ fill(gallons){
 
 
 drive(distance) {
-  // there IS enough gas
   if (this.tank * this.milesPerGallon > distance) {
     this.odometer += distance;
     this.tank = this.tank - distance / this.milesPerGallon;
-
-    // console.log(`MPG: ${this.milesPerGallon}, Made it fine - Tank: ${this.tank}. I've got ${this.milesPerGallon} MPG`);
-    // console.log(`Made it fine - Tank: ${this.tank}`);
   }
-  // theres NOT enough gas
   else {
     this.odometer = this.odometer + this.tank * this.milesPerGallon;
     this.tank = 0;
-
-    // console.log(`I ran out of fuel at ${this.odometer} miles! Tank: ${this.tank}`);
     return `I ran out of fuel at ${this.odometer} miles!`;
   }
 }
